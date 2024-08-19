@@ -27,4 +27,4 @@ MODEL=sienna ZIPCODE=32801 DISTANCE=120 poetry run update_vehicles
 
 ## Flat Viewer
 
-https://flatgithub.com/ianko/sienna_grabber?filename=output%2Fsienna.csv
+https://flatgithub.com/miamiluxury/toyotamodel_grabber?filename=output%2Fsequoia.csv
