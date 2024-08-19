@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MODEL: sequoia
-      ZIPCODE: ${{ vars.ZIPCODE }}
-      DISTANCE: ${{ vars.DISTANCE }}
+      ZIPCODE: 33137
+      DISTANCE: 500
     steps:
       - name: Clone repo
         uses: actions/checkout@v4
