@@ -15,11 +15,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update_siennas:
+  update_sequoias:
     name: "Update"
     runs-on: ubuntu-latest
     env:
-      MODEL: sienna
+      MODEL: sequoia
       ZIPCODE: ${{ vars.ZIPCODE }}
       DISTANCE: ${{ vars.DISTANCE }}
     steps:
@@ -67,7 +67,7 @@ jobs:
   commit_changes:
     name: "Commit changes"
     runs-on: ubuntu-latest
-    needs: [update_siennas]
+    needs: [update_sequoias]
     steps:
       - name: Clone repo
         uses: actions/checkout@v4
@@ -81,7 +81,7 @@ jobs:
           git config user.email "gha-bot@github.com"
           git add output
           timestamp=$(date -u)
-          git commit -m "Updating siennas data: ${timestamp}" || exit 0
+          git commit -m "Updating sequoias data: ${timestamp}" || exit 0
           git clean -fxd
           git status
           git pull --rebase
