@@ -14,11 +14,11 @@ import warnings
 from sienna_grabber import config, wafbypass
 
 # Get the model that we should be searching for.
-MODEL = os.environ.get("MODEL")
+MODEL = "sequoia"
 
 # Get the zipcode and distance to search.
-ZIPCODE = os.environ.get("ZIPCODE")
-DISTANCE = os.environ.get("DISTANCE")
+ZIPCODE = "33137"
+DISTANCE = "500"
 
 @cache
 def get_vehicles_query():
@@ -27,14 +27,27 @@ def get_vehicles_query():
         query = fileh.read()
 
     # Replace certain place holders in the query with values.
-    query = query.replace("ZIPCODE", ZIPCODE)
-    query = query.replace("MODELCODE", MODEL)
-    query = query.replace("DISTANCEMILES", DISTANCE)
+    query = query.replace("ZIPCODE", "33137")
+    query = query.replace("MODELCODE", "sequoia")
+    query = query.replace("DISTANCEMILES", "500")
     query = query.replace("LEADIDUUID", str(uuid.uuid4()))
 
     return query
 
+@cache
+def get_schema_query():
+    """Read schema query from a file."""
+    with open(f"{config.BASE_DIRECTORY}/graphql/schema.graphql", "r") as fileh:
+        query = fileh.read()
 
+    # Replace certain place holders in the query with values.
+    # query = query.replace("ZIPCODE", ZIPCODE)
+    # query = query.replace("MODELCODE", MODEL)
+    # query = query.replace("DISTANCEMILES", DISTANCE)
+    # query = query.replace("LEADIDUUID", str(uuid.uuid4()))
+
+    return query
+    
 def read_local_data():
     """Read local raw data from the disk instead of querying Toyota."""
     return pd.read_json(f"output/{MODEL}_raw.json")
